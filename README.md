@@ -3,25 +3,25 @@
 A simple Python Task Manager where you can add, view, edit, and mark tasks as done.
 This project is built to practice CRUD operations (Create, Read, Update, Delete) and saving data with Python.
 
-✨ Features
+ Features
 
-➕ Add new tasks
+ Add new tasks
 
-📋 View all tasks
+ View all tasks
 
-✏️ Edit tasks
+ Edit tasks
 
-✅ Mark tasks as completed
+ Mark tasks as completed
 
-❌ Delete tasks
+ Delete tasks
 
 **🛠 Skills & Tools**
 
-🐍 Python basics (functions, loops, conditionals)
+ Python basics (functions, loops, conditionals)
 
-📂 File handling (JSON for saving tasks)
+ File handling (JSON for saving tasks)
 
-🔄 CRUD operations
+ CRUD operations
 
 **🚀 Why this project?**
 
