@@ -1,4 +1,4 @@
-**📝 Task Manager (To-Do App)**
+#**📝 Task Manager (To-Do App)**
 
 A simple Python Task Manager where you can add, view, edit, and mark tasks as done.
 This project is built to practice CRUD operations (Create, Read, Update, Delete) and saving data with Python.
