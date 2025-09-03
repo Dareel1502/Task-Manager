@@ -1,5 +1,9 @@
 import tkinter as tk
 from tkinter import simpledialog, messagebox
+import json
+import os
+
+DATA_FILE = "tasks.json"
 
 class TaskManager:
     def __init__(self, root):
@@ -7,8 +11,8 @@ class TaskManager:
         self.root.title("📝 Task Manager")
         self.root.geometry("400x500")
 
-        # Task list
-        self.tasks = []
+        # Load tasks from file
+        self.tasks = self.load_tasks()
 
         # Input frame
         frame = tk.Frame(self.root)
@@ -37,10 +41,25 @@ class TaskManager:
         delete_button = tk.Button(button_frame, text="❌ Delete", command=self.delete_task)
         delete_button.grid(row=0, column=2, padx=5)
 
+        self.update_listbox()
+
+    # 📂 Load tasks from JSON
+    def load_tasks(self):
+        if os.path.exists(DATA_FILE):
+            with open(DATA_FILE, "r") as f:
+                return json.load(f)
+        return []
+
+    # 📂 Save tasks to JSON
+    def save_tasks(self):
+        with open(DATA_FILE, "w") as f:
+            json.dump(self.tasks, f, indent=4)
+
     def add_task(self):
         task = self.task_entry.get().strip()
         if task:
             self.tasks.append({"title": task, "completed": False})
+            self.save_tasks()
             self.update_listbox()
             self.task_entry.delete(0, tk.END)
         else:
@@ -54,6 +73,7 @@ class TaskManager:
             new_task = simpledialog.askstring("Edit Task", "Update task:", initialvalue=old_task)
             if new_task:
                 self.tasks[index]["title"] = new_task
+                self.save_tasks()
                 self.update_listbox()
         else:
             messagebox.showwarning("Warning", "Please select a task to edit!")
@@ -63,6 +83,7 @@ class TaskManager:
         if selected:
             index = selected[0]
             self.tasks[index]["completed"] = True
+            self.save_tasks()
             self.update_listbox()
         else:
             messagebox.showwarning("Warning", "Please select a task to mark as complete!")
@@ -72,6 +93,7 @@ class TaskManager:
         if selected:
             index = selected[0]
             del self.tasks[index]
+            self.save_tasks()
             self.update_listbox()
         else:
             messagebox.showwarning("Warning", "Please select a task to delete!")
